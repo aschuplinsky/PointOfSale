@@ -17,38 +17,41 @@ function addItem()
   if (newItem = NaN)
   {
     document.getElementById("price").innerHTML = "Enter price as number";
-    document.getElementById("price").classList.add("has-error");
+    document.getElementById("subtotal").classList.add("has-error");
 
   }else {
-    document.getElementById("price").classList.add("has-success");
+    document.getElementById("subtotal").classList.add("has-success");
   }
 }
 
 //takes a number and gives a string with the number displayed as USD currency
-function asCurrency(val)
+function asCurrency(subtotal)
 {
   return "$" + val.toFixed(2);
 }
 
 //courtesy of w3schools, from: http://www.w3schools.com/js/js_cookies.asp
-function setCookie(cname, cvalue, exdays) {
+function setCookie(preTax, subtotal, exdays) {
     var d = new Date();
     d.setTime(d.getTime() + (exdays*24*60*60*1000));
     var expires = "expires="+d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    document.cookie = preTax + "price" + subtotal + ";" + expires + ";path=/";
 }
 //courtesy of w3schools, from: http://www.w3schools.com/js/js_cookies.asp
-function getCookie(cname) {
-    var name = cname + "=";
+function getCookie(preTax) {
+    var subtotal = preTax + "price";
     var ca = document.cookie.split(';');
     for(var i = 0; i < ca.length; i++) {
         var c = ca[i];
         while (c.charAt(0) == ' ') {
             c = c.substring(1);
         }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
+        if (c.indexOf(subtotal) == 0) {
+            return c.substring(subtotal.length, c.length);
         }
     }
     return "";
+}
+function calculateReciept(){
+  
 }
